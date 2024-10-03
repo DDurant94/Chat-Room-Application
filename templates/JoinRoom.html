@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Flask-SocketIO Chat Room</title>
+
+    </head>
+
+    <body>
+
+        <h1>Flask-SocketIO Chat Room</h1>
+
+        <form id="join-room-form">
+
+            <input type="text" id="username-input" placeholder="Enter your username" autocomplete="off">
+            <button type="submit">Join Room</button>
+
+        </form>
+
+        <div id="chat-room" style="display:none;">
+
+            <ul id="messages"></ul>
+
+            <form id="message-form">
+
+                <input type="text" id="message-input" placeholder="Enter your message" autocomplete="off">
+                <button type="submit">Send</button>
+
+            </form>
+
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.min.js"></script>
+
+        <script>
+
+            const socket = io();
+            const joinRoomForm = document.getElementById('join-room-form');
+            const usernameInput = document.getElementById('username-input');
+            const chatRoom = document.getElementById('chat-room');
+            const messageForm = document.getElementById('message-form');
+            const messageInput = document.getElementById('message-input');
+            const messages = document.getElementById('messages');
+            let username = '';
+
+            joinRoomForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                username = usernameInput.value.trim();
+                if (username !== '') {
+                    joinRoomForm.style.display = 'none';
+                    chatRoom.style.display = 'block';
+                    socket.emit('join', { user: username });
+                }
+            });
+
+            messageForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const message = messageInput.value.trim();
+                if (message !== '') {
+                    socket.emit('message', { user: username, message: message });
+                    messageInput.value = '';
+                }
+            });
+
+            socket.on('message', function(data) {
+                const li = document.createElement('li');
+                li.textContent = `${data.user}: ${data.message}`;
+                messages.appendChild(li);
+            });
+
+            socket.on('join', function(data) {
+                const li = document.createElement('li');
+                li.textContent = `${data.user} has joined the chat`;
+                messages.appendChild(li);
+            });
+
+            socket.on('leave', function(data) {
+                const li = document.createElement('li');
+                li.textContent = `${data.user} has left the chat`;
+                messages.appendChild(li);
+            });
+            
+            
+        </script>
+    </body>
+</html>
