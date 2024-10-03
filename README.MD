@@ -39,3 +39,4 @@
   3. Access the Application: Open your browser and go to <http://127.0.0.1:5000>.
   4. Enter a Username: Enter a username of your choice to join the chat.
   5. Test with Multiple Users: To see the application in action with multiple users, open another browser window, go to the same link, and enter a different username to start chatting.
+  

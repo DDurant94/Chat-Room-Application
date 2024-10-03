@@ -1,10 +1,12 @@
 About:
-    Chat Room Application is a websocket based server that allows for users to have real-time conversations without latency. This application 
-  was built in Python using flask and flask-socketio. With flask-socketio installed that allowed for the application to use websocket as the 
-  server. Then HTML5 was used to allow for a user interface using JavaScript event listeners to let users pick a username and join a chatroom 
-  session and send messages between them. This program uses a hashmap to keep track of messages sent by users displaying their username and 
-  message. It also uses a hashmap to keep track of when a user joins and disconnects from the server displaying that information to everyone 
-  within the chatroom. socketio.on and socketio.emit from "web_socket_server" makes all of this possible.
+    The Chat Room Application is a WebSocket-based server that allows users to have real-time conversations without latency. This application was 
+  built in Python using Flask and Flask-SocketIO. With Flask-SocketIO installed, the application can use WebSocket as the server. HTML5 was 
+  used to create the user interface, utilizing JavaScript event listeners to let users pick a username, join a chatroom session, and send 
+  messages.
+
+    This program uses a hashmap to keep track of messages sent by users, displaying their username and message. It also uses a hashmap to track 
+  when a user joins and disconnects from the server, displaying that information to everyone in the chatroom. The socketio.on and socketio.emit 
+  functions from “web_socket_server” make all of this possible.
 
 Repository Link:
   https://github.com/DDurant94/Chat-Room-Application
